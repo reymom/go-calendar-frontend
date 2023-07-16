@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  calendar_postgres:
+    image: ${DOCKER_REPOSITORY}:${PSQL_TAG}
+    environment:
+      - "PGPORT=5432"
+      - "POSTGRES_PASSWORD=calendar_dev_password"
+      - "POSTGRES_USER=calendar_dev_user"
+    ports:
+      - "5432:5432"
+  calendar_mocking:
+    image: ${DOCKER_REPOSITORY}:${MOCKING_APP_TAG}
+    restart: on-failure
+    depends_on:
+      - calendar_postgres
+    volumes:
+      - ./conf/:/reymom_bin/conf/
