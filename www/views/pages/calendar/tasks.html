@@ -1,5 +1,67 @@
 {{define "taskList"}}
-{{range .Tasks}}
-<h1>{{.Name}}</h1>
-{{end}}
+{{template "pre_template"}}
+
+{{$mode := .Common.Mode}}
+{{$isToday := .Common.IsToday}}
+{{$year := .Common.Year}}
+
+
+{{$week := .Filter.Week}}
+{{$day := .Filter.Day}}
+{{$weekDay := .Filter.GetWeekDay}}
+<table class="calendar-table table table-condensed table-tight">
+    <thead>
+        <tr>
+            <td colspan="7" style="text-align: center">
+                <table style="white-space: nowrap; width: 100%">
+                    <tr>
+                        <td style="text-align: left;">
+                            <span class="btn-group">
+                                <button class="btn btn-default">&lt;</button>
+                                <button class="btn btn-default">&gt;</button>
+                            </span>
+                            <button class="btn btn-default" {{if $isToday}}disabled{{end}}>Today</button>
+                        </td>
+                        <td>
+                            <span class="btn-group btn-group-lg">
+                                {{if eq $mode 3}}
+                                <button class="btn btn-link">{{$year}}</button>
+                                {{else if eq $mode 2}}
+                                <button class="btn btn-link">{{.Month.String}} - {{$year}}</button>
+                                {{else if eq $mode 1}}
+                                <button class="btn btn-link">{{FmtWeek $week}} - {{$year}}</button>
+                                {{else}}
+                                <button class="btn btn-link">{{$weekDay}} {{.Month}} {{$day}} {{$year}}</button>
+                                {{end}}
+                        </td>
+                        <td style="text-align: right">
+                            <span class="btn-group">
+                                <button class="btn btn-default" {{if eq $mode 3}}disabled{{end}}>Year</button>
+                                <button class="btn btn-default" {{if eq $mode 2}}disabled{{end}}>Month</button>
+                                <button class="btn btn-default" {{if eq $mode 1}}disabled{{end}}>Week</button>
+                                <button class="btn btn-default" {{if eq $mode 0}}disabled{{end}}>Day</button>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </thead>
+
+    {{if eq $mode 3}}
+    {{template "yearly" dict "ntasks" .Ntasks "year" $year}}
+    {{end}}
+
+    {{if or (eq $mode 2) (eq $mode 1)}}
+    {{template "monthly" dict "tasks" .Tasks "weekDays" .WeekDays "isToday" $isToday}}
+    {{end}}
+
+    {{if eq $mode 0}}
+    {{template "daily"}}
+    {{end}}
+
+</table>
+
+{{template "post_template"}}
 {{end}}

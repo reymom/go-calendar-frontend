@@ -1,0 +1,37 @@
+{{define "monthly"}}
+
+<thead>
+    <tr class="c-weeks">
+        <th class="c-name">Monday</th>
+        <th class="c-name">Tuesday</th>
+        <th class="c-name">Wednesday</th>
+        <th class="c-name">Thursday</th>
+        <th class="c-name">Friday</th>
+        <th class="c-name">Saturday</th>
+        <th class="c-name">Sunday</th>
+    </tr>
+</thead>
+<tbody>
+    {{$isToday := .isToday}}
+    {{$tasks := .Tasks}}
+    {{range .weekDays}}
+    <tr>
+        {{range $_, $wDay := .weekDays}}
+        <td class="{{if ne $wDay.nMonth 1}}inactive{{end}}">
+            {{range $days}}
+            <div class="date {{if eq . $today}}selected{{end}}">
+                day nº {{.}}
+                {{if eq $wDay.nMonth 1}}
+                {{range index $tasks .}}
+                <p>{{.}}</p>
+                {{end}}
+                {{end}}
+            </div>
+            {{end}}
+        </td>
+        {{end}}
+    </tr>
+    {{end}}
+</tbody>
+
+{{end}}
