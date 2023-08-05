@@ -4,3 +4,4 @@ conf/
 .vscode/
 .env.pw
 __debug*
+app
