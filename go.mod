@@ -3,7 +3,7 @@ module github.com/reymom/go-calendar-frontend
 go 1.20
 
 require (
-	github.com/reymom/go-calendar-tutorial v0.0.1-rc.1
+	github.com/reymom/go-calendar-tutorial v0.0.1-rc.4
 	github.com/rs/zerolog v1.29.1
 	github.com/urfave/negroni/v3 v3.0.0
 )

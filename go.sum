@@ -19,8 +19,8 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/reymom/go-calendar-tutorial v0.0.1-rc.1 h1:w4Yq24+BdDKpLCd+GBgLbI9lbtDlF9k9mnmEQHy9xMY=
-github.com/reymom/go-calendar-tutorial v0.0.1-rc.1/go.mod h1:D3H4OGl7dpe0QIpasCkLBLVtMSL/5ZaO3wdDc6rjtIM=
+github.com/reymom/go-calendar-tutorial v0.0.1-rc.4 h1:y6oXfR8spavLTojZDt3vdp286re+zXfTx6t8dXrIN58=
+github.com/reymom/go-calendar-tutorial v0.0.1-rc.4/go.mod h1:D3H4OGl7dpe0QIpasCkLBLVtMSL/5ZaO3wdDc6rjtIM=
 github.com/rs/xid v1.4.0/go.mod h1:trrq9SKmegXys3aeAKXMUTdJsYXVwGY3RLcfgqegfbg=
 github.com/rs/zerolog v1.29.1 h1:cO+d60CHkknCbvzEWxP0S9K6KqyTjrCNUy1LdQLCGPc=
 github.com/rs/zerolog v1.29.1/go.mod h1:Le6ESbR7hc+DP6Lt1THiV8CQSdkkNrd3R0XbEgp3ZBU=
