@@ -10,12 +10,7 @@ import (
 )
 
 func GenerateRoutes(conf *config.Config) (http.Handler, error) {
-	mux := http.NewServeMux()
-	mux.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./www/public/images"))))
-	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./www/public/css"))))
-
-	t := template.Must(template.New("html-tmpl").ParseGlob("www/views/pages/*/*.html"))
-	_, e := t.ParseGlob("www/views/pages/*/*.html")
+	t, e := template.New("html-tmpl").Funcs(newFuncMap()).ParseGlob("www/views/pages/*/*.html")
 	if e != nil {
 		return nil, e
 	}
@@ -24,15 +19,24 @@ func GenerateRoutes(conf *config.Config) (http.Handler, error) {
 		ConnectionStringRead:  conf.CalendarConnectionStringRead,
 		ConnectionStringWrite: conf.CalendarConnectionStringWrite,
 		MaxReadConnections:    2,
+		MaxWriteConnections:   1,
 	})
 	if e != nil {
 		return nil, e
 	}
 
+	mux := http.NewServeMux()
+	mux.Handle("/images/", http.StripPrefix("/images/", http.FileServer(http.Dir("./www/public/images"))))
+	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("./www/public/css"))))
 	e = tasks.NewRouteGenerator(t, tasksDao).GenerateRoutes(mux)
 	if e != nil {
 		return nil, e
 	}
 
+	mux.Handle("/", http.HandlerFunc(rootHandler))
 	return mux, nil
+}
+
+func rootHandler(w http.ResponseWriter, req *http.Request) {
+	http.Redirect(w, req, "/calendar/tasks", http.StatusSeeOther)
 }

@@ -13,8 +13,8 @@ var (
 )
 
 type Config struct {
-	CalendarConnectionStringRead  string `json:"calendarConnectionStringRead"`
-	CalendarConnectionStringWrite string `json:"calendarConnectionStringWrite"`
+	CalendarConnectionStringRead  string `json:"connectionStringRead"`
+	CalendarConnectionStringWrite string `json:"connectionStringWrite"`
 }
 
 func GenerateConfig(path string) (*Config, error) {
