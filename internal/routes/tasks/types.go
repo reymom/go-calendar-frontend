@@ -1,10 +1,6 @@
 package tasks
 
-import (
-	"time"
-
-	"github.com/reymom/go-calendar-tutorial/pkg/model"
-)
+import "time"
 
 type commonViewFields struct {
 	Mode    filterModeId
@@ -15,30 +11,19 @@ type commonViewFields struct {
 type filterModeId uint8
 
 const (
-	filterModeIdDay filterModeId = iota
+	filterModeIdNull filterModeId = iota
+	filterModeIdDay
 	filterModeIdWeek
 	filterModeIdMonth
 	filterModeIdYear
 )
 
-type viewFilter struct {
-	Year  int
-	Month time.Month
-	Week  int
-	Day   int
-}
-
-func (f viewFilter) GetWeekDay() time.Weekday {
-	return time.Date(f.Year, f.Month, f.Day, 0, 0, 0, 0, time.UTC).Weekday()
-}
-
-type weeklyTasks struct {
-	week       int
-	dailyTasks map[time.Weekday][]model.Task
-}
-
 type weekDays struct {
-	week   int
-	nMonth int
-	days   []int
+	Week int
+	Days []day
+}
+
+type day struct {
+	Day   int
+	Month time.Month
 }
