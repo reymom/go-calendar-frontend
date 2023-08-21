@@ -1,8 +1,10 @@
 package routes
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
+	"time"
 
 	"github.com/reymom/go-calendar-frontend/internal/config"
 	"github.com/reymom/go-calendar-frontend/internal/routes/tasks"
@@ -38,5 +40,7 @@ func GenerateRoutes(conf *config.Config) (http.Handler, error) {
 }
 
 func rootHandler(w http.ResponseWriter, req *http.Request) {
-	http.Redirect(w, req, "/calendar/tasks", http.StatusSeeOther)
+	now := time.Now()
+	url := fmt.Sprintf("%s?mode=3&month=%d&year=%d", tasks.TaskPrefixURL, now.Month(), now.Year())
+	http.Redirect(w, req, url, http.StatusSeeOther)
 }
