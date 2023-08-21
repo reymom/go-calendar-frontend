@@ -9,6 +9,6 @@ func (c constError) Error() string {
 const (
 	ErrTemplateEmpty     constError = "template is empty"
 	ErrUnknownFilterMode constError = "unknown time filter mode"
-	ErrIncorrectIsoWeek  constError = "incorrect ISO week"
-	ErrIncorrectIsoYear  constError = "incorrect ISO year"
+	errIncorrectIsoWeek  constError = "incorrect ISO week"
+	errIncorrectIsoYear  constError = "incorrect ISO year"
 )
