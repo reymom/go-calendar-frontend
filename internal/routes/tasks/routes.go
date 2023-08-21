@@ -9,6 +9,8 @@ import (
 	"github.com/urfave/negroni/v3"
 )
 
+const TaskPrefixURL string = "/calendar/tasks"
+
 type Router struct {
 	templates       *template.Template
 	tasksDao        model.TasksDao
@@ -20,7 +22,8 @@ func NewRouteGenerator(templates *template.Template, tasksDao model.TasksDao) *R
 }
 
 func (r *Router) GenerateRoutes(mux *http.ServeMux) error {
-	mux.Handle("/calendar/tasks", negroni.New(negroni.Wrap(http.HandlerFunc(r.tasksListHandler))))
+	mux.Handle(TaskPrefixURL, negroni.New(negroni.Wrap(http.HandlerFunc(r.tasksListHandler))))
+	mux.Handle(TaskPrefixURL+"/create", negroni.New(negroni.Wrap(http.HandlerFunc(r.createTaskHandler))))
 	return nil
 }
 
