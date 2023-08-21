@@ -1,0 +1,138 @@
+.calendar-table {
+    margin: 0 auto;
+    width: 700;
+}
+
+.day-wrapper {
+    width: 100%;
+    display: flex;
+    white-space: nowrap;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.calendar-day {
+    font-size: smaller;
+    color: rgba(56, 79, 58, 0.615);
+    border-radius: 50%;
+    align-self: flex-end;
+    padding: 0 5px;
+}
+
+.color-task-common {
+    border-radius: 5px;
+}
+
+.red-task {
+    background-color: red;
+    color: white;
+}
+
+.yellow-task {
+    background-color: yellow;
+}
+
+.blue-task {
+    background-color: blue;
+    color: white;
+}
+
+.orange-task {
+    background-color: orange;
+}
+
+.green-task {
+    background-color: green;
+    color: white;
+}
+
+.violet-task {
+    background-color: violet;
+}
+
+.cyan-task {
+    background-color: cyan;
+}
+
+.black-task {
+    background-color: black;
+    color: white;
+}
+
+.white-task {
+    background-color: white;
+}
+
+.hourly-container {
+    position: relative;
+    display: flex;
+}
+
+.hours-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+    min-width: 40px;
+    position: relative;
+    box-sizing: border-box;
+    margin-left: auto;
+    height: auto;
+}
+
+.tasks-columns {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 20px;
+    flex: 1 1 auto;
+    width: 100%;
+}
+
+.hour-row {
+    position: relative;
+    height: 48px;
+    padding-right: 8px;
+    text-align: right;
+}
+
+.task-row {
+    position: relative;
+    height: 48px;
+    margin-left: auto;
+    border: 1px;
+    border-bottom: 1px solid #dedbd3;
+    width: 100%;
+}
+
+.hour {
+    display: block;
+    position: relative;
+    top: -6px;
+}
+
+.task {
+    position: relative;
+    height: 48px;
+    padding-right: 8px;
+    text-align: right;
+}
+
+.calendar-months-row {
+    background-color: rgb(252, 248, 243);
+    height: 100px;
+    text-align: center;
+}
+
+.calendar-month {
+    padding-top: 35px !important;
+    cursor: pointer !important;
+}
+
+.calendar-month:hover {
+    background-color: rgb(221, 224, 238);
+}
+
+.fa-circle {
+    color: rgb(68, 0, 164);
+}
