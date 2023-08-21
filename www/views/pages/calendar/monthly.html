@@ -1,37 +1,57 @@
 {{define "monthly"}}
 
-<thead>
-    <tr class="c-weeks">
-        <th class="c-name">Monday</th>
-        <th class="c-name">Tuesday</th>
-        <th class="c-name">Wednesday</th>
-        <th class="c-name">Thursday</th>
-        <th class="c-name">Friday</th>
-        <th class="c-name">Saturday</th>
-        <th class="c-name">Sunday</th>
-    </tr>
-</thead>
-<tbody>
-    {{$isToday := .isToday}}
-    {{$tasks := .Tasks}}
-    {{range .weekDays}}
-    <tr>
-        {{range $_, $wDay := .weekDays}}
-        <td class="{{if ne $wDay.nMonth 1}}inactive{{end}}">
-            {{range $days}}
-            <div class="date {{if eq . $today}}selected{{end}}">
-                day nº {{.}}
-                {{if eq $wDay.nMonth 1}}
-                {{range index $tasks .}}
-                <p>{{.}}</p>
-                {{end}}
-                {{end}}
-            </div>
-            {{end}}
-        </td>
-        {{end}}
-    </tr>
-    {{end}}
-</tbody>
+<table class="table table-bordered" style="table-layout: fixed;">
+    <thead>
+        <tr class="c-weeks">
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{$isToday := .isToday}}
+        {{$month := .month}}
+        {{$hasTwoMonths := .hasTwoMonths}}
+        {{$year := .year}}
+        {{$tasks := .tasks}}
+        {{$weekDays := .weekDays}}
+        {{range $_, $week := $weekDays}}
+        <tr>
+            {{range $_, $wDay := $week.Days}}
+            {{$day := $wDay.Day}}
+            {{$dayMonth := $wDay.Month}}
 
+            {{$url := "#"}}
+            {{if and ($hasTwoMonths) (eq (len $weekDays) 1) (le $day 6)}}
+            {{$url = GetDayURL $wDay.Day (IncreaseMonth $wDay.Month) $year 0}}
+            {{else}}
+            {{$url = GetDayURL $wDay.Day $wDay.Month $year 0}}
+            {{end}}
+
+            <td {{if ne $dayMonth $month}} style="background-color:#f4efee;" {{end}} style="height:150px !important;"
+                onclick="window.location='{{$url}}';">
+                <div class="day-wrapper">
+                    <div {{if and (CheckIsToday $day) ($isToday) (eq $dayMonth $month)}}
+                        style="background-color:rgb(171, 207, 208);" {{end}} class="calendar-day">
+                        {{$day}}
+                    </div>
+                    {{if eq $dayMonth $month}}
+                    {{range index $tasks $day}}
+                    <div title="{{FormatTaskInfo .StartsAt .FinishesAt .Description}}" style="overflow-y: scroll;"
+                        class="color-task-common {{GetTaskColorClass .Color}}">
+                        {{.Name}}
+                    </div>
+                    {{end}}
+                    {{end}}
+                </div>
+            </td>
+            {{end}}
+        </tr>
+        {{end}}
+    </tbody>
+</table>
 {{end}}
