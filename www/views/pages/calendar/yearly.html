@@ -1,24 +1,110 @@
 {{define "yearly"}}
 
-<tbody>
-    <tr>
-        <td class="calendar-month">January<span class="badge">{{index .ntasks 1}}</span></td>
-        <td class="calendar-month">February<span class="badge">{{index .ntasks 2}}</span></td>
-        <td class="calendar-month">March<span class="badge">{{index .ntasks 3}}</span></td>
-        <td class="calendar-month">April<span class="badge">{{index .ntasks 4}}</span></td>
-    </tr>
-    <tr>
-        <td class="calendar-month">May<span class="badge">{{index .ntasks 5}}</span></td>
-        <td class="calendar-month">June<span class="badge">{{index .ntasks 6}}</span></td>
-        <td class="calendar-month">July<span class="badge">{{index .ntasks 7}}</span></td>
-        <td class="calendar-month">August<span class="badge">{{index .ntasks 8}}</span></td>
-    </tr>
-    <tr>
-        <td class="calendar-month">September<span class="badge">{{index .ntasks 9}}</span></td>
-        <td class="calendar-month">October<span class="badge">{{index .ntasks 10}}</span></td>
-        <td class="calendar-month">November<span class="badge">{{index .ntasks 11}}</span></td>
-        <td class="calendar-month">December<span class="badge">{{index .ntasks 12}}</span></td>
-    </tr>
-</tbody>
+<table class="table table-bordered" style="table-layout: fixed;">
+    <tbody>
+        <tr class="calendar-months-row">
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 1 .year 0}}';">January
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 1}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 2 .year 0}}';">February
+                <div class="fa-layers fa-fw">
+                    <i class=" fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 2}}
+                    </span>
+                </div>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 3 .year 0}}';">March
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 3}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 4 .year 0}}';">April
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 4}}
+                    </span>
+                </span>
+            </td>
+        </tr>
+        <tr class="calendar-months-row">
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 5 .year 0}}';">May
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 5}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 6 .year 0}}';">June
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 6}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 7 .year 0}}';">July
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 7}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 8 .year 0}}';">August
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 8}}
+                    </span>
+                </span>
+            </td>
+        </tr>
+        <tr class="calendar-months-row">
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 9 .year 0}}';">September
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 9}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 10 .year 0}}';">October
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 10}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 11 .year 0}}';">November
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 11}}
+                    </span>
+                </span>
+            </td>
+            <td class="calendar-month" onclick="window.location='{{GetMonthURL 12 .year 0}}';">December
+                <span class="fa-layers fa-fw">
+                    <i class="fas fa-circle fa-2x"></i>
+                    <span class="fa-layers-text fa-inverse" style="font-weight:900; margin-left:6px">
+                        {{index .ntasks 12}}
+                    </span>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 {{end}}
