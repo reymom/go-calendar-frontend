@@ -23,7 +23,7 @@ func NewRouteGenerator(templates *template.Template, tasksDao model.TasksDao) *R
 
 func (r *Router) GenerateRoutes(mux *http.ServeMux) error {
 	mux.Handle(TaskPrefixURL, negroni.New(negroni.Wrap(http.HandlerFunc(r.tasksListHandler))))
-	mux.Handle(TaskPrefixURL+"/create", negroni.New(negroni.Wrap(http.HandlerFunc(r.createTaskHandler))))
+	mux.Handle(TaskPrefixURL+"/create", negroni.New(negroni.Wrap(http.HandlerFunc(r.taskSubmitTaskHandler))))
 	return nil
 }
 

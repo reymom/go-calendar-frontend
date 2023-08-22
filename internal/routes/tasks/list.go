@@ -21,6 +21,10 @@ func (r *Router) tasksListHandler(w http.ResponseWriter, req *http.Request) {
 	mode, _ := strconv.Atoi(req.FormValue("mode"))
 	switch filterModeId(mode) {
 	case filterModeIdDay:
+		if req.FormValue("create") == "1" {
+			r.handleCreationDayTask(w, req)
+			break
+		}
 		r.handleDailyCalendarMode(w, req)
 	case filterModeIdWeek:
 		r.handleWeeklyCalendarMode(w, req)

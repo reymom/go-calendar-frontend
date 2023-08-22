@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -17,7 +16,7 @@ func (r *Router) handleDailyCalendarMode(w http.ResponseWriter, req *http.Reques
 	year, _ := strconv.Atoi(req.FormValue("year"))
 
 	filter := model.NewDailyFilter(uint(day), time.Month(month), uint(year))
-	dailyTasks, e := r.tasksDao.ListTasks(context.Background(), filter)
+	dailyTasks, e := r.tasksDao.ListTasks(req.Context(), filter)
 	if e != nil {
 		log.Err(e).Msgf("could not get tasks for day %d, month %s, year %d",
 			day, time.Month(month).String(), year)
@@ -46,6 +45,7 @@ func (r *Router) handleDailyCalendarMode(w http.ResponseWriter, req *http.Reques
 		Day      int
 		WeekDay  time.Weekday
 		Location string
+		Creation bool
 	}{
 		Tasks: tasks,
 		Common: commonViewFields{
@@ -57,6 +57,7 @@ func (r *Router) handleDailyCalendarMode(w http.ResponseWriter, req *http.Reques
 		Day:      day,
 		WeekDay:  time.Date(year, time.Month(month), day, 0, 0, 0, 0, time.Local).Weekday(),
 		Location: location,
+		Creation: false,
 	}
 	w.Header().Set("Content-Type", "text/html")
 	e = r.currentTemplate.Execute(w, m)
