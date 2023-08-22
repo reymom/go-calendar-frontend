@@ -3,8 +3,15 @@
 <table class="table table-striped" style="width: 100%;">
     <tbody>
         <tr>
-            <th>{{.location}}</th>
-            <td></td>
+            <th valign="middle">{{.location}}</th>
+            <td style="text-align: right;">
+                {{$createMode := "&create=1"}}
+                <a href="{{sprintf (GetDayURL .day .month .year 0) $createMode}}">
+                    <button type="button" data-toggle="tooltip" title="Create Task" data-placement="bottom"
+                        class="btn btn-shadow btn-success">Create Task
+                    </button>
+                </a>
+            </td>
         </tr>
     </tbody>
 </table>

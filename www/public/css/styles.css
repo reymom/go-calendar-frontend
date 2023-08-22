@@ -133,6 +133,7 @@
     background-color: rgb(221, 224, 238);
 }
 
-.fa-circle {
-    color: rgb(68, 0, 164);
+.color-icon {
+    border: 1px solid black;
+    border-radius: 50%;
 }
