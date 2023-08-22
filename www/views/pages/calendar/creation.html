@@ -1,0 +1,83 @@
+{{define "creation"}}
+
+<table class="table table-striped" style="width: 100%;">
+    <tbody>
+        <tr>
+            <th style="font-size: larger; color: rgb(15, 0, 46);" valign="middle">
+                New Task
+            </th>
+            <td style="text-align: right;">
+                <a href="{{GetDayURL .day .month .year 0}}">
+                    <i class="fa fa-times-circle fa-2x" style="color: rgb(138, 0, 0)"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="creation-container">
+    <form method="post" action="/calendar/tasks/create">
+        <input type="hidden" name="day" value="{{.day}}">
+        <input type="hidden" name="month" value="{{.month}}">
+        <input type="hidden" name="year" value="{{.year}}">
+        <input type="hidden" name="color" value="{{.color}}">
+
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th scope="row" style="width:20%;background-color:#E5E5E5" valign="middle">Name</th>
+                    <td><input type="text" name="name" class="form-control" placeholder="Name..."></td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width:20%;background-color:#E5E5E5" valign="middle">Description</th>
+                    <td>
+                        <input type="text" name="description" class="form-control" placeholder="Description...">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width:20%;background-color:#d7d2ff" valign="middle">Start Hour</th>
+                    <td>
+                        <input type="time" name="startsAt" min="00:00" max="23:59" required />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width:20%;background-color:#d7d2ff" valign="middle">End Hour</th>
+                    <td>
+                        <input type="time" name="finishesAt" min="00:00" max="23:59" required />
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" style="width:20%;background-color:#ffd9d2" valign="middle">Color</th>
+                    <td valign="middle" style="text-align: center; vertical-align: center;">
+                        <div style="display: flex; gap: 20px;">
+                            {{template "color-picker" dict "Checked" (eq .color 0) "color" 0 "style" "red"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 1) "color" 1 "style" "yellow"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 2) "color" 2 "style" "blue"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 3) "color" 3 "style" "orange"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 4) "color" 4 "style" "green"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 5) "color" 5 "style" "violet"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 6) "color" 6 "style" "cyan"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 7) "color" 7 "style" "black"
+                            "day" .day "month" .month "year" .year}}
+                            {{template "color-picker" dict "Checked" (eq .color 8) "color" 8 "style" "white"
+                            "day" .day "month" .month "year" .year}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center" style="margin-top: 20px;">
+            <button type="submit" class="btn btn-primary btn-lg">Create</button>
+        </div>
+    </form>
+</div>
+
+{{end}}

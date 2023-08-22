@@ -1,0 +1,16 @@
+{{define "color-picker"}}
+
+{{$colorParameter := sprintf "&create=1" (sprintf "&color=" .color)}}
+{{$timesColor := "white"}}
+{{if or (eq .color 1) (eq .color 8)}}
+{{$timesColor = "black"}}
+{{end}}
+<span class="fa-layers" style="cursor: pointer !important; align-self: center;"
+    onclick="window.location='{{sprintf (GetDayURL .day .month .year 0) $colorParameter}}';">
+    <i class="fa fa-circle fa-2x color-icon" style="color: {{.style}}"></i>
+    {{if .Checked}}
+    <i class="fa fa-inverse fa-solid fa-times" style="color: {{$timesColor}}; margin-left:10px;"></i>
+    {{end}}
+</span>
+
+{{end}}
