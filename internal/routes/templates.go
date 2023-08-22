@@ -30,6 +30,9 @@ func newFuncMap() template.FuncMap {
 		"GetCurrentDayURL":   getCurrentDayURL,
 		"LoopHours":          loopHours,
 		"LoopInts":           loopInts,
+		"sprintf": func(s, i interface{}) string {
+			return fmt.Sprintf("%v%v", s, i)
+		},
 	}
 }
 
