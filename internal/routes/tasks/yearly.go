@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 	"time"
@@ -16,7 +15,7 @@ func (r *Router) handleYearlyCalendarMode(w http.ResponseWriter, req *http.Reque
 	nTasks := make(map[time.Month]int, 12)
 	for i := time.Month(1); i <= 12; i++ {
 		filter := model.NewMonthlyFilter(i, uint(year))
-		t, e := r.tasksDao.ListTasks(context.Background(), filter)
+		t, e := r.tasksDao.ListTasks(req.Context(), filter)
 		if e != nil {
 			log.Err(e).Msgf("could not get tasks for month %s", i.String())
 		}

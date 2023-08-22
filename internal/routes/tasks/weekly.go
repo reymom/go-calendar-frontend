@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 	"time"
@@ -35,7 +34,7 @@ func (r *Router) handleWeeklyCalendarMode(w http.ResponseWriter, req *http.Reque
 	month := firstDate.Month()
 
 	filter := model.NewWeeklyFilter(uint(week), uint(year))
-	weeklyTasks, e := r.tasksDao.ListTasks(context.Background(), filter)
+	weeklyTasks, e := r.tasksDao.ListTasks(req.Context(), filter)
 	if e != nil {
 		log.Err(e).Msgf("could not get tasks for iso week %d", week)
 	}

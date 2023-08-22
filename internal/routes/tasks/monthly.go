@@ -1,7 +1,6 @@
 package tasks
 
 import (
-	"context"
 	"net/http"
 	"strconv"
 	"time"
@@ -32,7 +31,7 @@ func (r *Router) handleMonthlyCalendarMode(w http.ResponseWriter, req *http.Requ
 	}
 
 	filter := model.NewMonthlyFilter(time.Month(month), uint(year))
-	monthlyTasks, e := r.tasksDao.ListTasks(context.Background(), filter)
+	monthlyTasks, e := r.tasksDao.ListTasks(req.Context(), filter)
 	if e != nil {
 		log.Err(e).Msgf("could not get tasks for month %s", time.Month(month).String())
 	}
