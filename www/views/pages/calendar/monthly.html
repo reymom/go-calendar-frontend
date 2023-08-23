@@ -41,7 +41,8 @@
                     </div>
                     {{if eq $dayMonth $month}}
                     {{range index $tasks $day}}
-                    <div title="{{FormatTaskInfo .StartsAt .FinishesAt .Description}}" style="overflow-y: scroll;"
+                    <div title="{{FormatTaskInfo .StartsAt .FinishesAt .Description}}"
+                        style="overflow-y: scroll;{{if .Completed}}text-decoration: line-through;{{end}}"
                         class="color-task-common {{GetTaskColorClass .Color}}">
                         {{.Name}}
                     </div>

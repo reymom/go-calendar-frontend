@@ -1,12 +1,15 @@
 {{define "daily"}}
 
+{{$day := .day}}
+{{$month := .month}}
+{{$year := .year}}
 <table class="table table-striped" style="width: 100%;">
     <tbody>
         <tr>
             <th valign="middle">{{.location}}</th>
             <td style="text-align: right;">
                 {{$createMode := "&create=1"}}
-                <a href="{{sprintf (GetDayURL .day .month .year 0) $createMode}}">
+                <a href="{{sprintf (GetDayURL $day $month $year 0) $createMode}}">
                     <button type="button" data-toggle="tooltip" title="Create Task" data-placement="bottom"
                         class="btn btn-shadow btn-success">Create Task
                     </button>
@@ -30,10 +33,29 @@
         <div class="task-row">
             <span class="task">
                 {{range index $tasks .}}
-                <p title="{{FormatTaskInfo .StartsAt .FinishesAt .Description}}" style="overflow-y: scroll;"
-                    class="color-task-common {{GetTaskColorClass .Color}}">
-                    {{.Name}}
-                </p>
+                <div>
+                    {{if .Completed}}
+                    <a href="{{GetSetCompletedURL .TaskId $day $month $year false}}">
+                        <i class="fa fa-times fa-2x color-icon hover-icon" aria-hidden="true" title="Set as Incompleted"
+                            style="color:red;float:left;margin-top:-4px;padding:0 3px;width:30px;height:30px;"></i>
+                    </a>
+                    {{else}}
+                    <a href="{{GetSetCompletedURL .TaskId $day $month $year true}}">
+                        <i class="fa fa-check fa-2x color-icon hover-icon" aria-hidden="true" title="Set as Completed"
+                            style="color:green;float:left;margin-top:-3px;padding:5px;"></i>
+                    </a>
+                    {{end}}
+
+                    <a href="{{GetRemoveTaskURL .TaskId $day $month $year}}">
+                        <i class="fa fa-trash fa-2x color-icon hover-icon" aria-hidden="true" title="Remove"
+                            style="color:red;float:right;margin-top:-4px;padding:5px;"></i>
+                    </a>
+                    <p title="{{FormatTaskInfo .StartsAt .FinishesAt .Description}}"
+                        style="overflow-y: scroll;margin:0 50px;{{if .Completed}}text-decoration: line-through;{{end}}"
+                        class="color-task-common {{GetTaskColorClass .Color}}">
+                        {{.Name}}
+                    </p>
+                </div>
                 {{end}}
             </span>
         </div>

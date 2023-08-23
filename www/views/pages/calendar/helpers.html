@@ -5,12 +5,11 @@
 {{if or (eq .color 1) (eq .color 8)}}
 {{$timesColor = "black"}}
 {{end}}
-<span class="fa-layers" style="cursor: pointer !important; align-self: center;"
-    onclick="window.location='{{sprintf (GetDayURL .day .month .year 0) $colorParameter}}';">
+
+<span class="fa-layers" style="cursor: pointer !important; align-self: center;">
     <i class="fa fa-circle fa-2x color-icon" style="color: {{.style}}"></i>
-    {{if .Checked}}
-    <i class="fa fa-inverse fa-solid fa-times" style="color: {{$timesColor}}; margin-left:10px;"></i>
-    {{end}}
+    <i class="fa fa-inverse fa-solid fa-times" id='{{sprintf "faTimes_" .color}}'
+        style="margin-left:10px; color: {{$timesColor}}; {{if not .Checked}}opacity:0;{{end}}"></i>
 </span>
 
 {{end}}
