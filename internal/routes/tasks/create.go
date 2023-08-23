@@ -55,7 +55,7 @@ func (r *Router) handleCreationDayTask(w http.ResponseWriter, req *http.Request)
 	}
 }
 
-func (r *Router) taskSubmitTaskHandler(w http.ResponseWriter, req *http.Request) {
+func (r *Router) submitTaskHandler(w http.ResponseWriter, req *http.Request) {
 	var (
 		dayStr   = req.FormValue("day")
 		monthStr = req.FormValue("month")
@@ -76,15 +76,15 @@ func (r *Router) taskSubmitTaskHandler(w http.ResponseWriter, req *http.Request)
 	hour, _ := strconv.Atoi(hourMinute[0])
 	minute, _ := strconv.Atoi(hourMinute[1])
 	loc, _ := time.LoadLocation("Local")
-	startsAt := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC).In(loc)
+	startsAt := time.Date(year, time.Month(month), day, hour, minute, 0, 0, loc).In(loc)
 
 	finishHour := req.FormValue("finishesAt")
 	hourMinute = strings.Split(finishHour, ":")
 	hour, _ = strconv.Atoi(hourMinute[0])
 	minute, _ = strconv.Atoi(hourMinute[1])
-	finishesAt := time.Date(year, time.Month(month), day, hour, minute, 0, 0, time.UTC).In(loc)
+	finishesAt := time.Date(year, time.Month(month), day, hour, minute, 0, 0, loc).In(loc)
 
-	task, e := r.tasksDao.CreateTask(req.Context(), model.AddableTask{
+	_, e := r.tasksDao.CreateTask(req.Context(), model.AddableTask{
 		Name:        req.FormValue("name"),
 		Description: req.FormValue("description"),
 		StartsAt:    startsAt,
@@ -94,11 +94,7 @@ func (r *Router) taskSubmitTaskHandler(w http.ResponseWriter, req *http.Request)
 	})
 	if e != nil {
 		log.Err(e).Msg("error creating task")
-		http.Redirect(w, req, redirectUrl, http.StatusBadRequest)
-		return
 	}
 
-	log.Warn().Msgf("task = %+v\n", task)
-
-	http.Redirect(w, req, redirectUrl, http.StatusCreated)
+	http.Redirect(w, req, redirectUrl, http.StatusSeeOther)
 }
