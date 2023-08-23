@@ -1,5 +1,20 @@
 {{define "creation"}}
 
+<script>
+    function colorClicked(id) {
+        document.getElementById('colorInput').value = id.toString();
+        for (let i = 0; i <= 8; i++) {
+            var elementId = 'faTimes_' + i;
+
+            if (i == id) {
+                document.getElementById(elementId).style.opacity = 1;
+            } else {
+                document.getElementById(elementId).style.opacity = 0;
+            }
+        }
+    }
+</script>
+
 <table class="table table-striped" style="width: 100%;">
     <tbody>
         <tr>
@@ -18,9 +33,9 @@
 <div class="creation-container">
     <form method="post" action="/calendar/tasks/create">
         <input type="hidden" name="day" value="{{.day}}">
-        <input type="hidden" name="month" value="{{.month}}">
+        <input type="hidden" name="month" value="{{intMonth .month}}">
         <input type="hidden" name="year" value="{{.year}}">
-        <input type="hidden" name="color" value="{{.color}}">
+        <input type="hidden" name="color" value="{{.color}}" id="colorInput">
 
         <table class="table table-bordered">
             <tbody>
@@ -50,24 +65,42 @@
                     <th scope="row" style="width:20%;background-color:#ffd9d2" valign="middle">Color</th>
                     <td valign="middle" style="text-align: center; vertical-align: center;">
                         <div style="display: flex; gap: 20px;">
-                            {{template "color-picker" dict "Checked" (eq .color 0) "color" 0 "style" "red"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 1) "color" 1 "style" "yellow"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 2) "color" 2 "style" "blue"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 3) "color" 3 "style" "orange"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 4) "color" 4 "style" "green"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 5) "color" 5 "style" "violet"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 6) "color" 6 "style" "cyan"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 7) "color" 7 "style" "black"
-                            "day" .day "month" .month "year" .year}}
-                            {{template "color-picker" dict "Checked" (eq .color 8) "color" 8 "style" "white"
-                            "day" .day "month" .month "year" .year}}
+                            <span onclick="colorClicked(0)">
+                                {{template "color-picker" dict "Checked" (eq .color 0) "color" 0 "style" "red"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(1)">
+                                {{template "color-picker" dict "Checked" (eq .color 1) "color" 1 "style" "yellow"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(2)">
+                                {{template "color-picker" dict "Checked" (eq .color 2) "color" 2 "style" "blue"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(3)">
+                                {{template "color-picker" dict "Checked" (eq .color 3) "color" 3 "style" "orange"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(4)">
+                                {{template "color-picker" dict "Checked" (eq .color 4) "color" 4 "style" "green"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(5)">
+                                {{template "color-picker" dict "Checked" (eq .color 5) "color" 5 "style" "violet"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(6)">
+                                {{template "color-picker" dict "Checked" (eq .color 6) "color" 6 "style" "cyan"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(7)">
+                                {{template "color-picker" dict "Checked" (eq .color 7) "color" 7 "style" "black"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
+                            <span onclick="colorClicked(8)">
+                                {{template "color-picker" dict "Checked" (eq .color 8) "color" 8 "style" "white"
+                                "day" .day "month" .month "year" .year}}
+                            </span>
                         </div>
                     </td>
                 </tr>
