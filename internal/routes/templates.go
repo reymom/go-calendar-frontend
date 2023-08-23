@@ -14,6 +14,8 @@ import (
 func newFuncMap() template.FuncMap {
 	return template.FuncMap{
 		"dict":               passDictInTemplate,
+		"GetRemoveTaskURL":   removeTaskURL,
+		"GetSetCompletedURL": setCompletedURL,
 		"FmtWeek":            fmtWeek,
 		"CheckHasTwoMonths":  checkHasTwoMonths,
 		"CheckIsToday":       checkIsToday,
@@ -33,6 +35,9 @@ func newFuncMap() template.FuncMap {
 		"sprintf": func(s, i interface{}) string {
 			return fmt.Sprintf("%v%v", s, i)
 		},
+		"intMonth": func(month time.Month) int {
+			return int(month)
+		},
 	}
 }
 
@@ -49,6 +54,16 @@ func passDictInTemplate(values ...interface{}) map[string]interface{} {
 		dict[key] = values[i+1]
 	}
 	return dict
+}
+
+func removeTaskURL(taskId string, day int, month time.Month, year int) string {
+	return fmt.Sprintf("%s/remove?taskId=%s&day=%d&month=%d&year=%d",
+		tasks.TaskPrefixURL, taskId, day, month, year)
+}
+
+func setCompletedURL(taskId string, day int, month time.Month, year int, complete bool) string {
+	return fmt.Sprintf("%s/complete?taskId=%s&day=%d&month=%d&year=%d&complete=%t",
+		tasks.TaskPrefixURL, taskId, day, month, year, complete)
 }
 
 func fmtWeek(isoWeek int, year int) string {
